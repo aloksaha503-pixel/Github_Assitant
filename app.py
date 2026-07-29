@@ -1,19 +1,50 @@
+import random
 import streamlit as st
 from rag.chatbot import ask_question
 
 st.set_page_config(
     page_title="Git Repo Assistant",
     page_icon="🤖",
+    layout="centered"
 )
 
-st.title("🤖 Git Repo Assistant")
-st.write("Ask any Git or GitHub-related question.")
+st.title("🤖 :green[Git Repo] Assistant")
 
-question = st.text_input("Enter your question:")
+st.caption(
+    "Your AI-powered assistant for learning Git and GitHub."
+)
+st.divider()
 
-if st.button("Ask") and question:
-    with st.spinner("Thinking..."):
-        answer = ask_question(question)
+spinner_messages = [
+    "📡 Contacting NASA...",
+    "👽 Calling aliens for advice...",
+    "🙏🏼 Asking God...",
+    "🧙 Asking your toper friend...",
+    "💻 Calling Stephen Hawking..",
+]
 
-    st.success("Answer")
-    st.write(answer)
+question = st.text_area(
+    "Ask your question",
+    placeholder="Example: Explain the difference between git merge and git rebase.",
+    height=70
+)
+
+
+ask = st.button("🚀 Ask", use_container_width=True)
+
+
+if ask:
+
+    if not question.strip():
+        st.warning("⚠️ Please enter a question.")
+    else:
+
+        with st.spinner(random.choice(spinner_messages)):
+            answer = ask_question(question)
+
+        st.success("✅ Answer")
+        st.write(answer)
+
+st.divider()
+
+st.caption("Created by JEET • SANIYA • SNIGDHA • ABHIJIT • ALOK")
