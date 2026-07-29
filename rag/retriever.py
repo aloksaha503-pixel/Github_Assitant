@@ -12,7 +12,13 @@ def get_retriever():
     )
 
     retriever = vector_store.as_retriever(
-        search_kwargs={"k": 3}
-    )
+    search_type="mmr",
+    search_kwargs={
+        "k": 5,
+        "fetch_k": 15,
+        "lambda_mult": 0.7
+    }
+    ) 
+    
 
     return retriever
